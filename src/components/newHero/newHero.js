@@ -1,0 +1,1 @@
+// component about new hero
