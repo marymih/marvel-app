@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 import MarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
@@ -14,6 +14,12 @@ class CharInfo extends Component {
     error: false,
   };
 
+  myRef = React.createRef();
+
+  scrollToMyRef = () => {
+    this.myRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
   marvelService = new MarvelService();
 
   componentDidMount() {
@@ -23,6 +29,7 @@ class CharInfo extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.charId !== prevProps.charId) {
       this.updateChar();
+      this.scrollToMyRef();
     }
   }
 
@@ -63,7 +70,7 @@ class CharInfo extends Component {
     const content = !(loading || error || !char) ? <View char={char} /> : null;
 
     return (
-      <div className="char__info">
+      <div className="char__info" ref={this.myRef}>
         {skeleton}
         {errorMessage}
         {spinner}
