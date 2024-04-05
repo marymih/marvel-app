@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import MarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
@@ -14,12 +15,6 @@ class CharInfo extends Component {
     error: false,
   };
 
-  myRef = React.createRef();
-
-  scrollToMyRef = () => {
-    this.myRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
-
   marvelService = new MarvelService();
 
   componentDidMount() {
@@ -29,7 +24,6 @@ class CharInfo extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.charId !== prevProps.charId) {
       this.updateChar();
-      this.scrollToMyRef();
     }
   }
 
@@ -70,7 +64,7 @@ class CharInfo extends Component {
     const content = !(loading || error || !char) ? <View char={char} /> : null;
 
     return (
-      <div className="char__info" ref={this.myRef}>
+      <div className="char__info">
         {skeleton}
         {errorMessage}
         {spinner}
@@ -128,6 +122,10 @@ const View = ({ char }) => {
       </ul>
     </>
   );
+};
+
+CharInfo.propTypes = {
+  charId: PropTypes.number
 };
 
 export default CharInfo;
