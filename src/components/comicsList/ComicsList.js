@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -21,7 +22,6 @@ const ComicsList = () => {
   const onRequest = (offset, initial) => {
     initial ? setNewComicsLoading(false) : setNewComicsLoading(true);
     getAllComics(offset).then(onComicsListLoaded);
-
   };
 
   const onComicsListLoaded = (newComicsList) => {
@@ -39,10 +39,9 @@ const ComicsList = () => {
 
   function renderItems(arr) {
     const items = arr.map((item, i) => {
-        
       return (
         <li className="comics__item" key={i}>
-          <a href="#">
+          <Link to={`/comics/${item.id}`}>
             <img
               src={item.thumbnail}
               alt={item.title}
@@ -50,7 +49,7 @@ const ComicsList = () => {
             />
             <div className="comics__item-name">{item.title}</div>
             <div className="comics__item-price">{item.price}</div>
-          </a>
+          </Link>
         </li>
       );
     });
@@ -69,9 +68,9 @@ const ComicsList = () => {
       <button
         className="button button__main button__long"
         disabled={newComicsLoading}
-        style={{ 'display': comicsEnded ? 'none' : 'block' }}
+        style={{ display: comicsEnded ? 'none' : 'block' }}
         onClick={() => onRequest(offset)}
-        >
+      >
         <div className="inner">load more</div>
       </button>
     </div>
