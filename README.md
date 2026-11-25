@@ -2,7 +2,9 @@
 
 [This app](https://marvel-app-marymih.vercel.app/) serves as a Marvel information portal and shows details about characters and a list of comics in which they have appeared.
 
-App was developed during an [Udemy course](https://www.udemy.com/course/javascript_full/?couponCode=KEEPLEARNING).
+App was developed during an [Udemy course](https://www.udemy.com/course/javascript_full/).
+
+> **Status:** the Marvel API is no longer available, so the live demo does not load data anymore. The repository is archived and kept for reference.
 
 ## Technology stack
 
